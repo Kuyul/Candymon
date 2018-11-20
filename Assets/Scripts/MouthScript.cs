@@ -8,7 +8,6 @@ public class MouthScript : MonoBehaviour {
     {
         if (collision.tag == "Jelly") {
             GameControl.Instance.RemoveCandy(collision.gameObject);
-            //Destroy(collision.gameObject);
         }
     }
 }

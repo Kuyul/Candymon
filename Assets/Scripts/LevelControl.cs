@@ -8,6 +8,8 @@ public class LevelControl : MonoBehaviour {
     //Declare public variables
     public GameObject[] Candies;
     public Text[] CandyLevelTexts; //UI that represents candy levels
+    public Collider2D Spawn;
+    public Collider2D NoSpawn;
 
     //Declare private variables
     private List<int> CandyLevels = new List<int>();
@@ -55,9 +57,7 @@ public class LevelControl : MonoBehaviour {
             {
                 float seconds = 1.0f / CandyLevels[i];
                 yield return new WaitForSeconds(seconds);
-                var xPos = Random.Range(-MaxX, MaxX);
-                var yPos = Random.Range(-MaxY, MaxY);
-                var position = new Vector3(xPos, yPos, 0);
+                var position = GetValidPosition();
                 var a = Instantiate(Candies[i], position, Quaternion.identity);
                 GameControl.Instance.AddCandy(a);
             }
@@ -97,5 +97,28 @@ public class LevelControl : MonoBehaviour {
     {
         PlayerPrefs.DeleteAll();
         RefreshCandy();
+    }
+
+    //Called from the CreateCandy couroutine to get a valid spawnpoint
+    private Vector3 GetValidPosition()
+    {
+        //Candy must be generated within Spawn boundary, but it must be generated outside the No spawn boundary at the same time
+        //Below code handles the described logic
+        var xPos = Random.Range(Spawn.bounds.min.x, Spawn.bounds.max.x);
+        var yPos = Random.Range(Spawn.bounds.min.y, Spawn.bounds.max.y);
+        //Check if its within the nospawn box
+        bool xBound = NoSpawn.bounds.min.x < xPos && NoSpawn.bounds.max.x > xPos;
+        bool yBound = NoSpawn.bounds.min.y < yPos && NoSpawn.bounds.max.y > yPos;
+
+        //I don't know how to make this one smarter....
+        while (xBound && yBound)
+        {
+            xPos = Random.Range(Spawn.bounds.min.x, Spawn.bounds.max.x);
+            yPos = Random.Range(Spawn.bounds.min.y, Spawn.bounds.max.y);
+            xBound = NoSpawn.bounds.min.x < xPos && NoSpawn.bounds.max.x > xPos;
+            yBound = NoSpawn.bounds.min.y < yPos && NoSpawn.bounds.max.y > yPos;
+        }
+        var position = new Vector3(xPos, yPos, 0);
+        return position;
     }
 }

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Jelly
+  - NoSpawn
+  - Spawn
   layers:
   - Default
   - TransparentFX

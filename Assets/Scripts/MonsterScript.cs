@@ -12,6 +12,7 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     //Declare UI Components
     public Text LevelText;
     public Text ExpText;
+    public Slider ExpBar;
 
     //Declare public variables
     public GameObject MouthOpen;
@@ -45,6 +46,7 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         {
             LevelUp();
         }
+        ExpBar.value = (float)Experience / (float)LevelExp[Level - 1];
     }
 
     //On clicking the monster, its mouth will open and absorb all the candies on the screen
@@ -85,10 +87,11 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         ExpText.text = Experience + "/" + LevelExp[Level - 1];
     }
 
+    //On leveling up, update level text and reset exp to 0 and update playerprefs accordingly.
     public void LevelUp()
     {
         Level++;
-        PlayerPrefs.SetInt("Level", Level);
+        PlayerPrefs.SetInt("MonsterLevel", Level);
         LevelText.text = "Lv " + Level;
         Experience = 0;
         PlayerPrefs.SetInt("Experience", Experience);
