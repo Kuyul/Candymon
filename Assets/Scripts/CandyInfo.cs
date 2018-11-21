@@ -88,8 +88,10 @@ public class CandyInfo : MonoBehaviour
 
     public GameObject InstantiateAtPos(Vector3 pos)
     {
-        var obj = Instantiate(InstantiatePrefab, pos, Quaternion.identity);
+        var rotation = Quaternion.Euler(0,0,Random.Range(0,360)); //Add Random rotation
+        var obj = Instantiate(InstantiatePrefab, pos, rotation);
         obj.AddComponent<Candy>().Exp = Exp;
+        obj.GetComponent<Rigidbody2D>().velocity = Vector3.down * GameControl.Instance.FallSpeed;
         return obj;
     }
 }

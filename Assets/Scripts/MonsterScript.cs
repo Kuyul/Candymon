@@ -17,6 +17,7 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     //Declare public variables
     public GameObject MouthOpen;
     public GameObject MouthClosed;
+    public GameObject BounceOff;
     public float Speed = 100;
 
     //Declare private variables
@@ -60,11 +61,17 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         SetMouthOpen(false);
     }
 
+    //When mouth is open: 
+    //1. point effector is enabled
+    //2. Mouth Open Sprite is active
+    //3. 
+    //Vice versa
     private void SetMouthOpen(bool b)
     {
         PE.enabled = b;
         MouthOpen.SetActive(b);
         MouthClosed.SetActive(!b);
+        BounceOff.SetActive(!b);
     }
 
     public int GetMonsterLevel()
