@@ -22,10 +22,9 @@ GameObject:
   - component: {fileID: 212311884942886774}
   - component: {fileID: 50807066468711128}
   - component: {fileID: 58111507776123922}
-  - component: {fileID: 114276510819912178}
   m_Layer: 0
-  m_Name: Player candy
-  m_TagString: Jelly
+  m_Name: Candy 3
+  m_TagString: Candy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1748908273026894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,24 +71,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.52
---- !u!114 &114276510819912178
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1748908273026894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18b1c1f29981114097865b78d164af0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Exp: 30
 --- !u!212 &212311884942886774
 SpriteRenderer:
   m_ObjectHideFlags: 1

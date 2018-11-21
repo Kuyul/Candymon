@@ -6,46 +6,31 @@ using UnityEngine.UI;
 public class LevelControl : MonoBehaviour {
 
     //Declare public variables
-    public GameObject[] Candies;
+    public CandyInfo[] Candies;
     public Text[] CandyLevelTexts; //UI that represents candy levels
+    public Text[] CandyCostTexts; //UI that represents candy costs
     public Collider2D Spawn;
     public Collider2D NoSpawn;
 
     //Declare private variables
-    private List<int> CandyLevels = new List<int>();
     private Camera cam;
     private float MaxX;
     private float MaxY;
 
 	// Use this for initialization
 	void Start () {
-        cam = Camera.main;
-        //Get the boundaries of camera
-        Vector3 Boundary = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, cam.pixelHeight, cam.nearClipPlane));
-        MaxX = Boundary.x;
-        MaxY = Boundary.y;
-
         for (int i = 0; i < Candies.Length; i++)
         {
-            CandyLevels.Add(0);
+            Candies[i].Initialise(CandyLevelTexts[i], CandyCostTexts[i]);
             StartCoroutine(CreateCandy(i));
         }
-
-        //Get current candy levels and assign them to a private variable
-        RefreshCandy();
-    }
-	
-	// Update is called once per frame
-	void Update () {
     }
 
     //This method is used from the UI buttons and its invoked when clicked.
     //takes candy index as an input parameter, and levels up the candy.
     public void LevelUpCandy(int i)
     {
-        var r = CandyLevels[i] + 1;
-        PlayerPrefs.SetInt("Candy" + i, r);
-        RefreshCandy();
+        Candies[i].Upgrade();
     }
 
     //Instantiates a candy gameobject of a given candy level in a given boundary
@@ -53,13 +38,13 @@ public class LevelControl : MonoBehaviour {
     {
         while (true)
         {
-            if (CandyLevels[i] > 0)
+            if (Candies[i].GetLevel() > 0)
             {
-                float seconds = 1.0f / CandyLevels[i];
+                float seconds = 1.0f / Candies[i].GetLevel();
                 yield return new WaitForSeconds(seconds);
                 var position = GetValidPosition();
-                var a = Instantiate(Candies[i], position, Quaternion.identity);
-                GameControl.Instance.AddCandy(a);
+                var candy = Candies[i].InstantiateAtPos(position);
+                GameControl.Instance.AddCandy(candy);
             }
             else
             {
@@ -68,35 +53,15 @@ public class LevelControl : MonoBehaviour {
         }
     }
 
-    private void RefreshCandy()
-    {
-        for (int i = 0; i < Candies.Length; i++)
-        {
-            CandyLevels[i] = GetCandyLevel(i);
-            CandyLevelTexts[i].text = CandyLevels[i] + "/10";
-        }
-    }
-
-    //Returns candy level for a given index
-    private int GetCandyLevel(int i)
-    {
-        int r;
-        if(i == 0)
-        {
-            r = PlayerPrefs.GetInt("Candy" + i, 1);
-        }
-        else
-        {
-            r = PlayerPrefs.GetInt("Candy" + i);
-        }
-
-        return r;
-    }
-
+    //Temporary
     public void DeleteAllPlayerprefs()
     {
         PlayerPrefs.DeleteAll();
-        RefreshCandy();
+        for (int i = 0; i < Candies.Length; i++)
+        {
+            Candies[i].SetLevel();
+            CandyLevelTexts[i].text = Candies[i].GetLevel() + "/10";
+        }
     }
 
     //Called from the CreateCandy couroutine to get a valid spawnpoint

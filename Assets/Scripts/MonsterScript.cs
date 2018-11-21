@@ -20,7 +20,6 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public float Speed = 100;
 
     //Declare private variables
-    private bool IsMouthOpen = false;
     private PointEffector2D PE;
     private int Level;
     private int Experience;
@@ -63,7 +62,6 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     private void SetMouthOpen(bool b)
     {
-        IsMouthOpen = b;
         PE.enabled = b;
         MouthOpen.SetActive(b);
         MouthClosed.SetActive(!b);

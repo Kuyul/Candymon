@@ -6,8 +6,8 @@ public class MouthScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Jelly") {
-            GameControl.Instance.RemoveCandy(collision.gameObject);
+        if (collision.tag == "Candy") {
+            GameControl.Instance.EatCandy(collision.gameObject);
         }
     }
 }

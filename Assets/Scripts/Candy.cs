@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CandyScript : MonoBehaviour {
+public class Candy : MonoBehaviour {
 
     public int Exp;
 }
