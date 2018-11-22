@@ -56,7 +56,7 @@ public class CandyInfo : MonoBehaviour
 
     //this method is called from the LevelControl class when upgrade button is clicked.
     //We check whether there is enough gold first.
-    public void Upgrade()
+    public bool Upgrade()
     {
         //Check if we have enough cash
         var gold = GameControl.Instance.GetGoldAmount();
@@ -65,10 +65,12 @@ public class CandyInfo : MonoBehaviour
             GameControl.Instance.AddGold(-CalculateCost());
             LevelUp();
             UpdateTexts();
+            return true;
         }
         else
         {
             Debug.Log("Not Enough Money");
+            return false;
         }
     }
 
@@ -86,12 +88,20 @@ public class CandyInfo : MonoBehaviour
         return (int)(UpgradeCost * Mathf.Pow(1.7f, Level));
     }
 
+    //Number of candy spawned from bag/jar = level + 4 (when level > 0)
+    public int GetCandyCount()
+    {
+        return Level + 4;
+    }
+
     public GameObject InstantiateAtPos(Vector3 pos)
     {
+        pos.z = 0;//Z axis should be 0
         var rotation = Quaternion.Euler(0,0,Random.Range(0,360)); //Add Random rotation
         var obj = Instantiate(InstantiatePrefab, pos, rotation);
         obj.AddComponent<Candy>().Exp = Exp;
         obj.GetComponent<Rigidbody2D>().velocity = Vector3.down * GameControl.Instance.FallSpeed;
+        GameControl.Instance.AddCandy(obj);
         return obj;
     }
 }

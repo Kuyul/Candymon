@@ -240,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -439,7 +439,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1089645252}
   m_HandleRect: {fileID: 0}
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 768
   m_MaxRayIntersections: 0
 --- !u!20 &519420031
 Camera:
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1280,8 +1280,14 @@ MonoBehaviour:
   - {fileID: 1552974960}
   - {fileID: 1321911844}
   - {fileID: 666739301}
-  Spawn: {fileID: 558387064}
+  Spawn: {fileID: 1991403017}
   NoSpawn: {fileID: 729923093}
+  CandyBag: {fileID: 1229385829118262, guid: d26967f6099308940a818a674c8191b8, type: 2}
+  NumberOfBags: 8
+  CandyJar: {fileID: 1237117513885738, guid: cf5ef6154035b6b4aa6873f572e8967e, type: 2}
+  SpawnFreq: 5
+  NumberOfJars: 2
+  JarSpawn: {fileID: 558387064}
 --- !u!4 &725082953
 Transform:
   m_ObjectHideFlags: 0
@@ -2371,7 +2377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.15446854, g: 1, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2789,6 +2795,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoldText: {fileID: 900904871}
   Mon: {fileID: 1623450763}
+  Level: {fileID: 725082952}
+  FallSpeed: 0
 --- !u!4 &1237089814
 Transform:
   m_ObjectHideFlags: 0
@@ -3537,7 +3545,7 @@ GameObject:
   - component: {fileID: 1623450764}
   - component: {fileID: 1623450766}
   - component: {fileID: 1623450763}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3942,7 +3950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

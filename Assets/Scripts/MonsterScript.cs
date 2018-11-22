@@ -49,22 +49,9 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         ExpBar.value = (float)Experience / (float)LevelExp[Level - 1];
     }
 
-    //On clicking the monster, its mouth will open and absorb all the candies on the screen
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        SetMouthOpen(true);
-    }
-
-    //On mousebutton up, its mouth will close
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        SetMouthOpen(false);
-    }
-
     //When mouth is open: 
     //1. point effector is enabled
     //2. Mouth Open Sprite is active
-    //3. 
     //Vice versa
     private void SetMouthOpen(bool b)
     {
@@ -89,17 +76,30 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         Experience += value;
         PlayerPrefs.SetInt("Experience", Experience);
-        ExpText.text = Experience + "/" + LevelExp[Level - 1];
+        ExpText.text = Experience + "/" + LevelExp[PlayerPrefs.GetInt("MonsterLevel", 1) - 1];
     }
 
     //On leveling up, update level text and reset exp to 0 and update playerprefs accordingly.
     public void LevelUp()
     {
+        Experience -= LevelExp[Level - 1];
         Level++;
         PlayerPrefs.SetInt("MonsterLevel", Level);
         LevelText.text = "Lv " + Level;
-        Experience = 0;
         PlayerPrefs.SetInt("Experience", Experience);
         ExpText.text = Experience + "/" + LevelExp[Level - 1];
+    }
+
+
+    //On clicking the monster, its mouth will open and absorb all the candies on the screen
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        SetMouthOpen(true);
+    }
+
+    //On mousebutton up, its mouth will close
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        SetMouthOpen(false);
     }
 }
