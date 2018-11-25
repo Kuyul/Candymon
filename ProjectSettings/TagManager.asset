@@ -8,6 +8,7 @@ TagManager:
   - NoSpawn
   - Spawn
   - Candy
+  - JarConvert
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - Monster
   - CandyBag
-  - 
+  - Candy
   - 
   - 
   - 

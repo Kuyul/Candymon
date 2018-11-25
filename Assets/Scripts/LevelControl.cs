@@ -80,7 +80,7 @@ public class LevelControl : MonoBehaviour {
     //takes candy index as an input parameter, and levels up the candy.
     public void LevelUpCandy(int i)
     {
-        bool success = Candies[i].Upgrade();
+        var success = Candies[i].Upgrade();
         if(success)
         PopulateCandyTypes();
     }
@@ -106,30 +106,10 @@ public class LevelControl : MonoBehaviour {
                 var position = GetValidPosition(JarSpawn);
                 var obj = Instantiate(CandyJar, position, Quaternion.identity);
                 var type = MaxCandyTypes[Random.Range(0, MaxCandyTypes.Count)];
-                obj.GetComponent<CandyBombScript>().SetCandy(Candies[type]); //Set which candy type the bomb holds
+                obj.GetComponent<CandyJarScript>().SetCandy(Candies[type]); //Set which candy type the bomb holds
             }
         }
     }
-
-    /*Depreciated
-    //Instantiates a candy gameobject of a given candy level in a given boundary
-    IEnumerator CreateCandy(int i)
-    {
-        while (true)
-        {
-            if (Candies[i].GetLevel() > 0)
-            {
-                float seconds = 1.0f / Candies[i].GetLevel();
-                yield return new WaitForSeconds(seconds);
-                var position = GetValidPosition(Spawn);
-                var candy = Candies[i].InstantiateAtPos(position);
-            }
-            else
-            {
-                yield return new WaitForSeconds(1.0f);
-            }
-        }
-    }*/
 
     //Temporary
     public void DeleteAllPlayerprefs()
@@ -150,8 +130,8 @@ public class LevelControl : MonoBehaviour {
         var xPos = Random.Range(spawn.bounds.min.x, spawn.bounds.max.x);
         var yPos = Random.Range(spawn.bounds.min.y, spawn.bounds.max.y);
         //Check if its within the nospawn box
-        bool xBound = NoSpawn.bounds.min.x < xPos && NoSpawn.bounds.max.x > xPos;
-        bool yBound = NoSpawn.bounds.min.y < yPos && NoSpawn.bounds.max.y > yPos;
+        var xBound = NoSpawn.bounds.min.x < xPos && NoSpawn.bounds.max.x > xPos;
+        var yBound = NoSpawn.bounds.min.y < yPos && NoSpawn.bounds.max.y > yPos;
 
         //I don't know how to make this one smarter....
         while (xBound && yBound)
@@ -174,8 +154,8 @@ public class LevelControl : MonoBehaviour {
     //Calculate exp gained while in idle mode
     public int IdleExperienceGained(int idleSeconds)
     {
-        float count = NumberOfJars * (idleSeconds / SpawnFreq); //How many jars spawned during that period?
-        int avgExp = 0;
+        var count = NumberOfJars * (idleSeconds / SpawnFreq); //How many jars spawned during that period?
+        var avgExp = 0;
         //Go through all the maxed candies, and calculate what the average exp of a jar would be.
         for(int i = 0; i < MaxCandyTypes.Count; i++)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CandyBombScript : MonoBehaviour, IPointerDownHandler
+public class CandyJarScript : MonoBehaviour, IPointerDownHandler
 {
     //Declare public variables
     public GameObject Sprite;
@@ -37,6 +37,14 @@ public class CandyBombScript : MonoBehaviour, IPointerDownHandler
             Popped = true;
             cc.isTrigger = true; //Starts off as a collider it must be changed to a trigger for pointeffector to become active
             Pop();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "JarConvert")
+        {
+            cc.isTrigger = false;
         }
     }
 
