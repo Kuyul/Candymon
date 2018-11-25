@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 374290756}
   - component: {fileID: 374290757}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: Exp bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1954,7 +1954,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1623450765}
+  m_Father: {fileID: 2143321632}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &873288349
@@ -2794,9 +2794,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoldText: {fileID: 900904871}
+  LevelText: {fileID: 220441227}
+  ExpText: {fileID: 608634213}
+  ExpBar: {fileID: 374290757}
   Mon: {fileID: 1623450763}
   Level: {fileID: 725082952}
   FallSpeed: 0
+  LevelExp: 0a0000001e0000005a0000000e0100002a0300007e090000981c0000c855000060ea000020bf0200
 --- !u!4 &1237089814
 Transform:
   m_ObjectHideFlags: 0
@@ -2875,7 +2879,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1623450765}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1256275210
 CapsuleCollider2D:
@@ -2904,7 +2908,7 @@ GameObject:
   - component: {fileID: 1316599940}
   - component: {fileID: 1316599939}
   m_Layer: 0
-  m_Name: Monster HP
+  m_Name: Monster Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2924,7 +2928,7 @@ RectTransform:
   - {fileID: 608634212}
   - {fileID: 220441226}
   m_Father: {fileID: 1623450765}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3570,7 +3574,6 @@ MonoBehaviour:
   MouthOpen: {fileID: 1828093475}
   MouthClosed: {fileID: 866636196}
   BounceOff: {fileID: 1256275208}
-  Speed: 10
 --- !u!61 &1623450764
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3606,8 +3609,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1828093477}
-  - {fileID: 866636198}
+  - {fileID: 2143321632}
   - {fileID: 1889400644}
   - {fileID: 1256275209}
   - {fileID: 1316599938}
@@ -3899,7 +3901,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1623450765}
+  m_Father: {fileID: 2143321632}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1831496918
@@ -3999,7 +4001,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1623450765}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1889400645
 MonoBehaviour:
@@ -4820,3 +4822,33 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2124195980}
   m_CullTransparentMesh: 0
+--- !u!1 &2143321631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2143321632}
+  m_Layer: 8
+  m_Name: Monster1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2143321632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2143321631}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1828093477}
+  - {fileID: 866636198}
+  m_Father: {fileID: 1623450765}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

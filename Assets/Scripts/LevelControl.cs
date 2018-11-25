@@ -111,6 +111,7 @@ public class LevelControl : MonoBehaviour {
         }
     }
 
+    /*Depreciated
     //Instantiates a candy gameobject of a given candy level in a given boundary
     IEnumerator CreateCandy(int i)
     {
@@ -128,7 +129,7 @@ public class LevelControl : MonoBehaviour {
                 yield return new WaitForSeconds(1.0f);
             }
         }
-    }
+    }*/
 
     //Temporary
     public void DeleteAllPlayerprefs()
