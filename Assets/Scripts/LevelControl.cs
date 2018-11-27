@@ -14,6 +14,7 @@ public class LevelControl : MonoBehaviour {
     public GameObject CandyBag;
     public int NumberOfBags = 8;
     public Transform[] SpawnPositions;
+    public int MaxCandyCount = 200; //Maximum number of candies on the screen
 
     //Bomb related components
     public GameObject CandyJar;
@@ -28,7 +29,7 @@ public class LevelControl : MonoBehaviour {
     private int BagCount = 0;
     private List<int> ActiveCandyTypes = new List<int>(); //List of candies between level 1 ~ 9
     private List<int> MaxCandyTypes = new List<int>(); //List of candies greater than or equal to level 10
-    private List<int> SpawnedIndexes = new List<int>();
+    private List<int> SpawnedIndexes = new List<int>(); //We don't want the bags to overlap, store the list of spawned positions just for reference
 
 	// Use this for initialization
 	void Start () {
@@ -42,9 +43,9 @@ public class LevelControl : MonoBehaviour {
 
     private void Update()
     {
-        if (BagCount == 0)
+        if (BagCount == 0 && GameControl.Instance.GetCandyCount() <= MaxCandyCount)
         {
-            SpawnedIndexes.Clear(); //Must clear this!
+            SpawnedIndexes.Clear(); //Must clear this! clear the list of spawned positions
             for (int i = 0; i < NumberOfBags; i++)
             {
                 //Create a random candy bag from active candy types array
@@ -54,7 +55,8 @@ public class LevelControl : MonoBehaviour {
                 }
                 else
                 {
-                    CreateBag(MaxCandyTypes[Random.Range(0, MaxCandyTypes.Count)]);
+                    //Spawn a candy bag from maxed level candies if user decided to all in on one candy only.. and decided to leave other candies at lv 0 :D
+                    CreateBag(MaxCandyTypes[Random.Range(0, MaxCandyTypes.Count)]); 
                 }
             }
         }
@@ -105,11 +107,11 @@ public class LevelControl : MonoBehaviour {
         while (true) {
             yield return new WaitForSeconds(SpawnFreq);
             //Bombs are only spawned when there are more than 0 maximum candies
-            if (MaxCandyTypes.Count > 0)
+            if (MaxCandyTypes.Count > 0 && GameControl.Instance.GetCandyCount() <= MaxCandyCount)
             {
                 var position = GetValidPosition(JarSpawn);
                 var obj = Instantiate(CandyJar, position, Quaternion.identity);
-                var type = MaxCandyTypes[Random.Range(0, MaxCandyTypes.Count)];
+                var type = MaxCandyTypes[MaxCandyTypes.Count-1];
                 obj.GetComponent<CandyJarScript>().SetCandy(Candies[type]); //Set which candy type the bomb holds
             }
         }
@@ -171,18 +173,11 @@ public class LevelControl : MonoBehaviour {
     {
         var count = NumberOfJars * (idleSeconds / SpawnFreq); //How many jars spawned during that period?
         var avgExp = 0;
-        //Go through all the maxed candies, and calculate what the average exp of a jar would be.
-        for(int i = 0; i < MaxCandyTypes.Count; i++)
-        {
-            var candy = Candies[MaxCandyTypes[i]];
-            var spawnCount = candy.GetCandyCount();
-            var exp = candy.Exp;
-            avgExp += spawnCount * exp;
-        }
-        if (MaxCandyTypes.Count > 0)
-        {
-            avgExp = avgExp / MaxCandyTypes.Count;
-        }
+        //Get the last maxed candy, and calculate idle experience gained with it.
+        var candy = Candies[MaxCandyTypes[MaxCandyTypes.Count - 1]];
+        var spawnCount = candy.GetCandyCount();
+        var exp = candy.Exp;
+        avgExp += spawnCount * exp;
         return avgExp * (int)count;
     }
 }

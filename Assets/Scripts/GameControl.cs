@@ -168,6 +168,11 @@ public class GameControl : MonoBehaviour {
         Level.DecrementCounter();
     }
 
+    public int GetCandyCount()
+    {
+        return Candies.Count;
+    }
+
     //Formats the number from thousand onwards - used for candy cost formatting
     public static string FormatNumberKM(int number)
     {
