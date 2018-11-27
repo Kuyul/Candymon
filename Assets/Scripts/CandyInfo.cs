@@ -79,6 +79,10 @@ public class CandyInfo : MonoBehaviour
     {
         Level++;
         PlayerPrefs.SetInt("Candy" + Type, Level);
+        if(Level == 10)
+        {
+            GameControl.Instance.AddEvolutionCount(); //When you level up a candy to 10, add an evolution counter that changes the character's looks
+        }
     }
     
     //This method was created because we could add a complex logic in the future, but for now Level * initial cost

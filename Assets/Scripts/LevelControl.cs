@@ -13,6 +13,7 @@ public class LevelControl : MonoBehaviour {
     public Collider2D NoSpawn;
     public GameObject CandyBag;
     public int NumberOfBags = 8;
+    public Transform[] SpawnPositions;
 
     //Bomb related components
     public GameObject CandyJar;
@@ -27,6 +28,7 @@ public class LevelControl : MonoBehaviour {
     private int BagCount = 0;
     private List<int> ActiveCandyTypes = new List<int>(); //List of candies between level 1 ~ 9
     private List<int> MaxCandyTypes = new List<int>(); //List of candies greater than or equal to level 10
+    private List<int> SpawnedIndexes = new List<int>();
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +44,7 @@ public class LevelControl : MonoBehaviour {
     {
         if (BagCount == 0)
         {
+            SpawnedIndexes.Clear(); //Must clear this!
             for (int i = 0; i < NumberOfBags; i++)
             {
                 //Create a random candy bag from active candy types array
@@ -88,7 +91,8 @@ public class LevelControl : MonoBehaviour {
     //Spawn a candybag on a random spawn point
     private void CreateBag(int i)
     {
-        var position = GetValidPosition(Spawn);
+        //var position = GetValidPosition(Spawn);
+        var position = GetSpawnPosition();
         position.z = -2.0f; //Bag must be in front of monster click
         var obj = Instantiate(CandyBag, position, Quaternion.identity);
         BagCount++; //increment counter
@@ -120,6 +124,17 @@ public class LevelControl : MonoBehaviour {
             Candies[i].SetLevel();
             CandyLevelTexts[i].text = Candies[i].GetLevel() + "/10";
         }
+    }
+
+    private Vector3 GetSpawnPosition()
+    {
+        var index = Random.Range(0, SpawnPositions.Length);
+        while (SpawnedIndexes.Contains(index))
+        {
+            index = Random.Range(0, SpawnPositions.Length);
+        }
+        SpawnedIndexes.Add(index);
+        return SpawnPositions[index].position;
     }
 
     //Called from the CreateCandy couroutine to get a valid spawnpoint
