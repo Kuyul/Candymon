@@ -281,7 +281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &306494739
 Transform:
   m_ObjectHideFlags: 0
@@ -3246,6 +3246,7 @@ MonoBehaviour:
   Mon: {fileID: 1623450763}
   Level: {fileID: 725082952}
   FallSpeed: 0
+  bagPop: {fileID: 0}
   LevelExp: 0a0000001e0000005a0000000e0100002a0300007e090000981c0000c855000060ea000020bf020020bf020020bf020020bf020020bf020020bf0200
 --- !u!4 &1237089814
 Transform:
@@ -4323,7 +4324,7 @@ Transform:
   m_GameObject: {fileID: 1623450762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 2143321632}
   - {fileID: 1256275209}
