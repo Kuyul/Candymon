@@ -26,6 +26,7 @@ public class CandyBagScript : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         Pop();
+        Instantiate(GameControl.Instance.bagPop, transform.position, Quaternion.identity);
     }
 
     public void Pop()
