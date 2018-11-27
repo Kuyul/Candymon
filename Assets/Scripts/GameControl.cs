@@ -20,7 +20,6 @@ public class GameControl : MonoBehaviour {
     public float FallSpeed = 3.0f;
 
     public GameObject bagPop;
-    public GameObject eat;
 
     //Declare private variables
     private List<GameObject> Candies;

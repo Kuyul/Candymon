@@ -1543,7 +1543,6 @@ MonoBehaviour:
   - {fileID: 1604967368}
   - {fileID: 2138184873}
   - {fileID: 1277041476}
-  MaxCandyCount: 200
   CandyJar: {fileID: 1237117513885738, guid: cf5ef6154035b6b4aa6873f572e8967e, type: 2}
   SpawnFreq: 2.5
   NumberOfJars: 2
@@ -3248,7 +3247,6 @@ MonoBehaviour:
   Level: {fileID: 725082952}
   FallSpeed: 0
   bagPop: {fileID: 1010571113276674, guid: 11694364c9e8a2a41be5faaff9a42328, type: 2}
-  eat: {fileID: 1588023382594386, guid: ffde68f7cdf951d4f90f0d3429b3ed6d, type: 2}
   LevelExp: 0a0000001e0000005a0000000e0100002a0300007e090000981c0000c855000060ea000020bf020020bf020020bf020020bf020020bf020020bf0200
 --- !u!4 &1237089814
 Transform:
@@ -4799,7 +4797,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.045046017, y: -0.07449925}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4810,7 +4808,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6501293, y: 0.6559489}
+  m_Size: {x: 0.41450387, y: 0.5069504}
   m_EdgeRadius: 0
 --- !u!1 &1901728643
 GameObject:
