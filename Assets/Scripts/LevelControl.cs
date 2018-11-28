@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelControl : MonoBehaviour {
+public class LevelControl : MonoBehaviour
+{
 
     //Declare public variables
     public CandyInfo[] Candies;
@@ -31,8 +32,9 @@ public class LevelControl : MonoBehaviour {
     private List<int> MaxCandyTypes = new List<int>(); //List of candies greater than or equal to level 10
     private List<int> SpawnedIndexes = new List<int>(); //We don't want the bags to overlap, store the list of spawned positions just for reference
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         for (int i = 0; i < Candies.Length; i++)
         {
             Candies[i].Initialise(CandyLevelTexts[i], CandyCostTexts[i]); //Initialise candy info stuff
@@ -56,7 +58,7 @@ public class LevelControl : MonoBehaviour {
                 else
                 {
                     //Spawn a candy bag from maxed level candies if user decided to all in on one candy only.. and decided to leave other candies at lv 0 :D
-                    CreateBag(MaxCandyTypes[Random.Range(0, MaxCandyTypes.Count)]); 
+                    CreateBag(MaxCandyTypes[Random.Range(0, MaxCandyTypes.Count)]);
                 }
             }
         }
@@ -68,13 +70,14 @@ public class LevelControl : MonoBehaviour {
         ActiveCandyTypes.Clear();
         MaxCandyTypes.Clear();
 
-        for(int i = 0; i < Candies.Length; i++)
+        for (int i = 0; i < Candies.Length; i++)
         {
             var level = Candies[i].GetLevel();
             if (level > 0 && level < 10) //candy types of levels between 1~9
             {
                 ActiveCandyTypes.Add(Candies[i].Type);
-            }else if(level >= 10) //Maxed out candies
+            }
+            else if (level >= 10) //Maxed out candies
             {
                 MaxCandyTypes.Add(Candies[i].Type);
             }
@@ -86,8 +89,10 @@ public class LevelControl : MonoBehaviour {
     public void LevelUpCandy(int i)
     {
         var success = Candies[i].Upgrade();
-        if(success)
-        PopulateCandyTypes();
+        if (success)
+        {
+            PopulateCandyTypes();
+        }
     }
 
     //Spawn a candybag on a random spawn point
@@ -104,14 +109,15 @@ public class LevelControl : MonoBehaviour {
     //For maxed out candies
     IEnumerator RunBombs()
     {
-        while (true) {
+        while (true)
+        {
             yield return new WaitForSeconds(SpawnFreq);
             //Bombs are only spawned when there are more than 0 maximum candies
             if (MaxCandyTypes.Count > 0 && GameControl.Instance.GetCandyCount() <= MaxCandyCount)
             {
                 var position = GetValidPosition(JarSpawn);
                 var obj = Instantiate(CandyJar, position, Quaternion.identity);
-                var type = MaxCandyTypes[MaxCandyTypes.Count-1];
+                var type = MaxCandyTypes[MaxCandyTypes.Count - 1];
                 obj.GetComponent<CandyJarScript>().SetCandy(Candies[type]); //Set which candy type the bomb holds
             }
         }
@@ -173,11 +179,19 @@ public class LevelControl : MonoBehaviour {
     {
         var count = NumberOfJars * (idleSeconds / SpawnFreq); //How many jars spawned during that period?
         var avgExp = 0;
-        //Get the last maxed candy, and calculate idle experience gained with it.
-        var candy = Candies[MaxCandyTypes[MaxCandyTypes.Count - 1]];
-        var spawnCount = candy.GetCandyCount();
-        var exp = candy.Exp;
-        avgExp += spawnCount * exp;
+        if (MaxCandyTypes.Count >= 1)
+        {
+            //Get the last maxed candy, and calculate idle experience gained with it.
+            var candy = Candies[MaxCandyTypes[MaxCandyTypes.Count - 1]];
+            var spawnCount = candy.GetCandyCount();
+            var exp = candy.Exp;
+            avgExp += spawnCount * exp;
+        }
         return avgExp * (int)count;
+    }
+
+    public CandyInfo[] GetCandyInfos()
+    {
+        return Candies;
     }
 }

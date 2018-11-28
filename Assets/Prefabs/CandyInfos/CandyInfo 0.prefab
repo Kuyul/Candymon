@@ -51,8 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18b1c1f29981114097865b78d164af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelText: {fileID: 0}
+  CostText: {fileID: 0}
   InstantiatePrefab: {fileID: 1608852985405194, guid: 4ce61c9f8fa1caf4db5f5c2c283c1dd2,
     type: 2}
   Type: 0
-  Exp: 3
+  Exp: 2
   UpgradeCost: 100

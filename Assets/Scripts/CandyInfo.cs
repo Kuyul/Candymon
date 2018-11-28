@@ -79,6 +79,10 @@ public class CandyInfo : MonoBehaviour
     {
         Level++;
         PlayerPrefs.SetInt("Candy" + Type, Level);
+        if(Level == 1)
+        {
+            GameControl.Instance.ActivateMonster(Type); //Monster Type == Candy Type
+        }
         if(Level == 10)
         {
             GameControl.Instance.AddEvolutionCount(); //When you level up a candy to 10, add an evolution counter that changes the character's looks
@@ -89,13 +93,13 @@ public class CandyInfo : MonoBehaviour
     public int CalculateCost()
     {
         //Logic - UpgradeCost * 1.7^Level
-        return (int)(UpgradeCost * Mathf.Pow(1.7f, Level));
+        return (int)(UpgradeCost * Mathf.Pow(1.3f, Level));
     }
 
     //Number of candy spawned from bag/jar = level + 4 (when level > 0)
     public int GetCandyCount()
     {
-        return Level + 4;
+        return Level * 2;
     }
 
     public GameObject InstantiateAtPos(Vector3 pos)

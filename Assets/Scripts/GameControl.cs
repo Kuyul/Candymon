@@ -27,22 +27,25 @@ public class GameControl : MonoBehaviour {
     private int Multiplier = 1;
     private int TimeDiff;
     private int ExpGained = 0;
+    private int AccumulatedExp = 0;
+    private int AccumulatedGold = 0;
 
     //Monster Related variables
     //Level - Exp list
-    public int[] LevelExp;
+    public long[] LevelExp;
     //private variables
     private int MonsterLevel;
-    private int Experience;
+    private long Experience;
 
     // Use this for initialization
     void Start () {
+        Application.targetFrameRate = 300;
 
 		if(Instance == null)
         {
             Instance = this;
         }
-        AddGold(999999);
+        //AddGold(999999);
         Candies = new List<GameObject>();
         Gold = GetGoldAmount();
         FormatNumberB(Gold);
@@ -99,8 +102,16 @@ public class GameControl : MonoBehaviour {
         Destroy(candy);
         Candies.Remove(candy);
         var exp = candy.GetComponent<Candy>().Exp;
-        AddExp(exp);
-        AddGold(exp * Multiplier);
+        AccumulatedExp += exp;
+        AccumulatedGold += exp * Multiplier;
+    }
+
+    public void FinishAccumulating()
+    {
+        AddExp(AccumulatedExp);
+        AddGold(AccumulatedGold);
+        AccumulatedExp = 0;
+        AccumulatedGold = 0;
     }
 
     //Monster Related Methods
@@ -109,9 +120,9 @@ public class GameControl : MonoBehaviour {
         return PlayerPrefs.GetInt("MonsterLevel", 1);
     }
 
-    public int GetMonsterExperience()
+    public long GetMonsterExperience()
     {
-        return PlayerPrefs.GetInt("Experience", 0);
+        return (long)PlayerPrefs.GetFloat("Experience", 0);
     }
 
     public void AddExp(int value)
@@ -121,7 +132,7 @@ public class GameControl : MonoBehaviour {
         {
             LevelUp();
         }
-        PlayerPrefs.SetInt("Experience", Experience);
+        PlayerPrefs.SetFloat("Experience", Experience);
         ExpText.text = Experience + "/" + LevelExp[MonsterLevel - 1];
     }
 
@@ -132,7 +143,7 @@ public class GameControl : MonoBehaviour {
         MonsterLevel++;
         PlayerPrefs.SetInt("MonsterLevel", MonsterLevel);
         LevelText.text = "Lv " + MonsterLevel;
-        PlayerPrefs.SetInt("Experience", Experience);
+        PlayerPrefs.SetFloat("Experience", Experience);
         ExpText.text = Experience + "/" + LevelExp[MonsterLevel - 1];
     }
 
@@ -173,6 +184,20 @@ public class GameControl : MonoBehaviour {
     public int GetCandyCount()
     {
         return Candies.Count;
+    }
+
+
+    //Required from MonsterScript class to determine which monsters should be set active
+    public CandyInfo[] GetCandyInfos()
+    {
+        return Level.GetCandyInfos();
+    }
+
+
+    //Called from the candyinfo class to activate monster when candy level goes from 0 -> 1
+    public void ActivateMonster(int i)
+    {
+        Mon.ActivateMonster(i);
     }
 
     //Formats the number from thousand onwards - used for candy cost formatting
