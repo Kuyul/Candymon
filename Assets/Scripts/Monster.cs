@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour {
 
+    //Declare Public Variables
     public GameObject Open;
     public GameObject Closed;
     public MouthScript Mouth;
     public GameObject BounceOff;
+    public GameObject Particle;
+
+    //Declare Private Variables
     private PointEffector2D pe;
     private SpriteRenderer sr;
 
@@ -15,6 +19,7 @@ public class Monster : MonoBehaviour {
     {
         pe = GetComponent<PointEffector2D>();
         sr = GetComponent<SpriteRenderer>();
+        Mouth.SetParticle(Particle);
     }
 
     public void SetLayerProperties(int layerNumber)

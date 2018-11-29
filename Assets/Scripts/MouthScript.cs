@@ -5,6 +5,7 @@ using UnityEngine;
 public class MouthScript : MonoBehaviour {
 
     private int Layer;
+    private GameObject Particle;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,5 +17,10 @@ public class MouthScript : MonoBehaviour {
     public void SetLayer(int l)
     {
         Layer = l;
+    }
+
+    public void SetParticle(GameObject particle)
+    {
+        Particle = particle;
     }
 }
