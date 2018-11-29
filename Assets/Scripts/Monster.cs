@@ -9,7 +9,6 @@ public class Monster : MonoBehaviour {
     public GameObject Closed;
     public MouthScript Mouth;
     public GameObject BounceOff;
-    public GameObject Particle;
 
     //Declare Private Variables
     private PointEffector2D pe;
@@ -19,7 +18,6 @@ public class Monster : MonoBehaviour {
     {
         pe = GetComponent<PointEffector2D>();
         sr = GetComponent<SpriteRenderer>();
-        Mouth.SetParticle(Particle);
     }
 
     public void SetLayerProperties(int layerNumber)
@@ -31,5 +29,10 @@ public class Monster : MonoBehaviour {
     public void SetColor(Color color)
     {
         sr.color = color;
+    }
+
+    public void SetParticle(GameObject particle)
+    {
+        Mouth.SetParticle(particle);
     }
 }

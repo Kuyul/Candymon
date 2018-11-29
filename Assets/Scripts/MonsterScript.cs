@@ -13,6 +13,7 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     //Declare public variables
     public GameObject[] Monsters;
+    public GameObject Particle;
 
     //Declare private variables
     private List<Monster> MonsterProperties = new List<Monster>();
@@ -36,6 +37,10 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
             //Set candy layer properties
             MonsterProperties[i].SetLayerProperties(candy.InstantiatePrefab.layer);
+            if (Particle != null)
+            {
+                MonsterProperties[i].SetParticle(Particle);
+            }
         }
     }
 

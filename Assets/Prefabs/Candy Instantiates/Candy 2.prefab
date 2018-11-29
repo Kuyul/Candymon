@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 96969606870751462}
   - component: {fileID: 250081275029209570}
   - component: {fileID: 58483539106914258}
-  - component: {fileID: 114693269129678464}
   m_Layer: 12
   m_Name: Candy 2
   m_TagString: Candy
@@ -197,18 +196,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &114693269129678464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1288168902514622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d47f1ad6b7fbfc24e8dc9f00cdab2b0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Exp: 0
 --- !u!212 &212160015541028832
 SpriteRenderer:
   m_ObjectHideFlags: 1
