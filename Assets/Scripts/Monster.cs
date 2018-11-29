@@ -8,10 +8,23 @@ public class Monster : MonoBehaviour {
     public GameObject Closed;
     public MouthScript Mouth;
     public GameObject BounceOff;
-    public int layer;
+    private PointEffector2D pe;
+    private SpriteRenderer sr;
 
     void Start()
     {
-        Mouth.SetLayer(layer);
+        pe = GetComponent<PointEffector2D>();
+        sr = GetComponent<SpriteRenderer>();
+    }
+
+    public void SetLayerProperties(int layerNumber)
+    {
+        pe.colliderMask = LayerMask.GetMask(LayerMask.LayerToName(layerNumber));
+        Mouth.SetLayer(layerNumber);
+    }
+
+    public void SetColor(Color color)
+    {
+        sr.color = color;
     }
 }

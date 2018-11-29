@@ -15,8 +15,8 @@ public class CandyInfo : MonoBehaviour
     //Declare public variables
     public GameObject InstantiatePrefab;
     public int Type;
-    public int Exp;
-    public int UpgradeCost;
+    public long Exp;
+    public long UpgradeCost;
 
     //Declare private variables
     private int Level;
@@ -90,10 +90,19 @@ public class CandyInfo : MonoBehaviour
     }
     
     //This method was created because we could add a complex logic in the future, but for now Level * initial cost
-    public int CalculateCost()
+    public long CalculateCost()
     {
         //Logic - UpgradeCost * 1.7^Level
-        return (int)(UpgradeCost * Mathf.Pow(1.3f, Level));
+        
+        var n = (long)(UpgradeCost * Mathf.Pow(1.3f, Level)); //ex 8796
+        long digits = (long)Mathf.Ceil(Mathf.Log10(n)); //ex 4
+        if (digits >= 4)
+        {
+            var b = digits - 3; //ex 1
+            long n3 = (long)Mathf.Round(n / (int)Mathf.Pow(10, b)); //Ex 8796/(10*1) = 879.6 rounded = 880
+            n = n3 * (int)Mathf.Pow(10, b);
+        }
+        return n;
     }
 
     //Number of candy spawned from bag/jar = level + 4 (when level > 0)

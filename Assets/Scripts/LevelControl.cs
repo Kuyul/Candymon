@@ -175,10 +175,10 @@ public class LevelControl : MonoBehaviour
     }
 
     //Calculate exp gained while in idle mode
-    public int IdleExperienceGained(int idleSeconds)
+    public long IdleExperienceGained(int idleSeconds)
     {
         var count = NumberOfJars * (idleSeconds / SpawnFreq); //How many jars spawned during that period?
-        var avgExp = 0;
+        long avgExp = 0;
         if (MaxCandyTypes.Count >= 1)
         {
             //Get the last maxed candy, and calculate idle experience gained with it.

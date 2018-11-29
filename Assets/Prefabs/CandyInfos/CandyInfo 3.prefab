@@ -9,17 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1368824671089950}
+  m_RootGameObject: {fileID: 1114888392734708}
   m_IsPrefabAsset: 1
---- !u!1 &1368824671089950
+--- !u!1 &1114888392734708
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4474965729555458}
-  - component: {fileID: 114760666443120358}
+  - component: {fileID: 4875596089067184}
+  - component: {fileID: 114683192722555540}
   m_Layer: 0
   m_Name: CandyInfo 3
   m_TagString: Untagged
@@ -27,12 +27,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4474965729555458
+--- !u!4 &4875596089067184
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1368824671089950}
+  m_GameObject: {fileID: 1114888392734708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 174.5, y: 310, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,12 +40,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114760666443120358
+--- !u!114 &114683192722555540
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1368824671089950}
+  m_GameObject: {fileID: 1114888392734708}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18b1c1f29981114097865b78d164af0, type: 3}
@@ -53,8 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelText: {fileID: 0}
   CostText: {fileID: 0}
-  InstantiatePrefab: {fileID: 1748908273026894, guid: 84fcfe53e59ba384994162f05c4edd61,
+  InstantiatePrefab: {fileID: 1242525658043698, guid: b627a26c67c89b34793981b72350bebd,
     type: 2}
-  Type: 3
-  Exp: 128
-  UpgradeCost: 12500
+  Type: 2
+  Exp: 32
+  UpgradeCost: 2500

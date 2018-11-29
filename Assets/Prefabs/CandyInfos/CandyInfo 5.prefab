@@ -53,8 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelText: {fileID: 0}
   CostText: {fileID: 0}
-  InstantiatePrefab: {fileID: 1748908273026894, guid: 21b9823de4b803b46a391bf4b454e12b,
+  InstantiatePrefab: {fileID: 1748908273026894, guid: 56e25b640135a4245827aa6b880220ab,
     type: 2}
-  Type: 5
-  Exp: 2048
-  UpgradeCost: 312500
+  Type: 4
+  Exp: 512
+  UpgradeCost: 62500

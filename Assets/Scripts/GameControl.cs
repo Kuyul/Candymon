@@ -23,12 +23,12 @@ public class GameControl : MonoBehaviour {
 
     //Declare private variables
     private List<GameObject> Candies;
-    private int Gold;
+    private long Gold;
     private int Multiplier = 1;
     private int TimeDiff;
-    private int ExpGained = 0;
-    private int AccumulatedExp = 0;
-    private int AccumulatedGold = 0;
+    private long ExpGained = 0;
+    private long AccumulatedExp = 0;
+    private long AccumulatedGold = 0;
 
     //Monster Related variables
     //Level - Exp list
@@ -56,7 +56,7 @@ public class GameControl : MonoBehaviour {
 
         //Set Experience Properties
         Experience = GetMonsterExperience();
-        ExpText.text = Experience + "/" + LevelExp[MonsterLevel - 1];
+        SetExpText();
 
         //Get time difference
         DateTime timeNow = System.DateTime.Now;
@@ -66,8 +66,6 @@ public class GameControl : MonoBehaviour {
             var diff = (timeNow - Convert.ToDateTime(timeEnded)).TotalSeconds;
             TimeDiff = Convert.ToInt32(diff);
             var expGained = Level.IdleExperienceGained(TimeDiff);
-            Debug.Log(TimeDiff);
-            Debug.Log(expGained);
             ExpGained = expGained; //Monster script will access it later
             AddGold(expGained * Multiplier);
         }
@@ -102,8 +100,8 @@ public class GameControl : MonoBehaviour {
         Destroy(candy);
         Candies.Remove(candy);
         var exp = candy.GetComponent<Candy>().Exp;
-        AccumulatedExp += exp;
-        AccumulatedGold += exp * Multiplier;
+        AddExp(exp);
+        AddGold(exp * Multiplier);
     }
 
     public void FinishAccumulating()
@@ -125,7 +123,12 @@ public class GameControl : MonoBehaviour {
         return (long)PlayerPrefs.GetFloat("Experience", 0);
     }
 
-    public void AddExp(int value)
+    private void SetExpText()
+    {
+        ExpText.text = FormatNumberKM(Experience) + "/" + FormatNumberKM(LevelExp[MonsterLevel - 1]);
+    }
+
+    public void AddExp(long value)
     {
         Experience += value;
         if (Experience >= LevelExp[MonsterLevel - 1])
@@ -133,7 +136,7 @@ public class GameControl : MonoBehaviour {
             LevelUp();
         }
         PlayerPrefs.SetFloat("Experience", Experience);
-        ExpText.text = Experience + "/" + LevelExp[MonsterLevel - 1];
+        SetExpText();
     }
 
     //On leveling up, update level text and reset exp to 0 and update playerprefs accordingly.
@@ -144,7 +147,7 @@ public class GameControl : MonoBehaviour {
         PlayerPrefs.SetInt("MonsterLevel", MonsterLevel);
         LevelText.text = "Lv " + MonsterLevel;
         PlayerPrefs.SetFloat("Experience", Experience);
-        ExpText.text = Experience + "/" + LevelExp[MonsterLevel - 1];
+        SetExpText();
     }
 
     public void AddEvolutionCount()
@@ -158,27 +161,35 @@ public class GameControl : MonoBehaviour {
         return PlayerPrefs.GetInt("Evolution", 0);
     }
 
-    public int GetExpGained()
+    public long GetExpGained()
     {
         return ExpGained;
     }
 
-    public int GetGoldAmount()
+    public long GetGoldAmount()
     {
-        return PlayerPrefs.GetInt("GoldAmount");
+        return (long)PlayerPrefs.GetFloat("GoldAmount");
     }
 
     //Input negative number to subtract the amount
-    public void AddGold(int amount)
+    public void AddGold(long amount)
     {
         Gold += amount;
         GoldText.text = FormatNumberB(Gold);
-        PlayerPrefs.SetInt("GoldAmount", Gold);
+        PlayerPrefs.SetFloat("GoldAmount", Gold);
     }
 
     public void DecrementBagCount()
     {
         Level.DecrementCounter();
+    }
+
+    public void StopCandies()
+    {
+        for (int i = 0; i < Candies.Count; i++)
+        {
+            Candies[i].GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        }
     }
 
     public int GetCandyCount()
@@ -201,11 +212,21 @@ public class GameControl : MonoBehaviour {
     }
 
     //Formats the number from thousand onwards - used for candy cost formatting
-    public static string FormatNumberKM(int number)
+    public static string FormatNumberKM(long number)
     {
         string r;
         float val;
-        if (number > 1000000000)
+        if (number > 1000000000000000)
+        {
+            val = number / 1000000000000000;
+            r = val.ToString("#.##Q");
+        }
+        else if (number > 1000000000000)
+        {
+            val = number / 1000000000000;
+            r = val.ToString("#.##T");
+        }
+        else if (number > 1000000000)
         {
             val = number / 1000000000f;
             r = val.ToString("#.##B");
@@ -218,7 +239,7 @@ public class GameControl : MonoBehaviour {
         else if (number > 1000)
         {
             val = number / 1000f;
-            r = (number / 1000).ToString("#.##K");
+            r = val.ToString("#.##K");
         }
         else
             r = number.ToString();
@@ -227,11 +248,21 @@ public class GameControl : MonoBehaviour {
     }
 
     //Formats the number from billion onwards - used for Money formatting
-    public static string FormatNumberB(int number)
+    public static string FormatNumberB(long number)
     {
         string r;
         float val;
-        if (number > 1000000000)
+        if (number > 1000000000000000)
+        {
+            val = number / 1000000000000000;
+            r = val.ToString("#.##Q");
+        }
+        else if (number > 1000000000000)
+        {
+            val = number / 1000000000000;
+            r = val.ToString("#.##T");
+        }
+        else if (number > 1000000000)
         {
             val = number / 1000000000f;
             r = val.ToString("#.##B");

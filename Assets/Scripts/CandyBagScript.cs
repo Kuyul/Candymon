@@ -21,6 +21,7 @@ public class CandyBagScript : MonoBehaviour, IPointerDownHandler
     public void SetCandy(CandyInfo candy)
     {
         Candy = candy;
+        Invoke("Pop", 8);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -44,7 +45,7 @@ public class CandyBagScript : MonoBehaviour, IPointerDownHandler
 
         //activate point effector for cool physics effect in action
         Sprite.SetActive(false);
-        pe.forceMagnitude = 30;
+        pe.forceMagnitude = 15;
         Destroy(this.gameObject, 0.1f);
 
         //Decrement total number of bag count

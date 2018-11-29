@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Candy : MonoBehaviour {
 
-    public int Exp;
+    public long Exp;
 }

@@ -25,7 +25,8 @@ GameObject:
   - component: {fileID: 96727117610469380}
   - component: {fileID: 250044018204778212}
   - component: {fileID: 58046869266978238}
-  m_Layer: 18
+  - component: {fileID: 114416071763144390}
+  m_Layer: 17
   m_Name: Candy 7
   m_TagString: Candy
   m_Icon: {fileID: 0}
@@ -56,7 +57,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0.1
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -196,6 +197,18 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &114416071763144390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1748908273026894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47f1ad6b7fbfc24e8dc9f00cdab2b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Exp: 0
 --- !u!212 &212311884942886774
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -231,8 +244,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c021918f2bb34744abb038a634e1f7e2, type: 3}
-  m_Color: {r: 0.121568635, g: 0.7372549, b: 0.8235295, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 04c251e595fac614dbb664832f61de42, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
