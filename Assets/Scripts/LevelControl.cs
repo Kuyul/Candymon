@@ -45,7 +45,7 @@ public class LevelControl : MonoBehaviour
 
     private void Update()
     {
-        if (BagCount == 0 && GameControl.Instance.GetCandyCount() <= MaxCandyCount)
+        if (BagCount <= 0 && GameControl.Instance.GetCandyCount() <= MaxCandyCount)
         {
             SpawnedIndexes.Clear(); //Must clear this! clear the list of spawned positions
             for (int i = 0; i < NumberOfBags; i++)

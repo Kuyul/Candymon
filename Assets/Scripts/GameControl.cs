@@ -45,7 +45,7 @@ public class GameControl : MonoBehaviour {
         {
             Instance = this;
         }
-        //AddGold(999999);
+        AddGold(9999999999999999);
         Candies = new List<GameObject>();
         Gold = GetGoldAmount();
         FormatNumberB(Gold);

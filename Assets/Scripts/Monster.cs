@@ -13,26 +13,35 @@ public class Monster : MonoBehaviour {
     //Declare Private Variables
     private PointEffector2D pe;
     private SpriteRenderer sr;
+    private Animator anim;
 
-    void Start()
+    private void Start()
     {
-        pe = GetComponent<PointEffector2D>();
-        sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     public void SetLayerProperties(int layerNumber)
     {
+        pe = GetComponent<PointEffector2D>();
         pe.colliderMask = LayerMask.GetMask(LayerMask.LayerToName(layerNumber));
         Mouth.SetLayer(layerNumber);
     }
 
-    public void SetColor(Color color)
-    {
-        sr.color = color;
-    }
-
+    //Called from the monster script class to pass down particle information down to mouthscript
     public void SetParticle(GameObject particle)
     {
         Mouth.SetParticle(particle);
+    }
+
+    //Called from MonsterScript class to start eating animation
+    public void Eating()
+    {
+        anim.SetTrigger("Eating");
+    }
+
+    //Called from MonsterScript class to stop eating animation
+    public void Done()
+    {
+        anim.SetTrigger("Done");
     }
 }

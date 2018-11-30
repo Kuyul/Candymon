@@ -11,6 +11,7 @@ public class MouthScript : MonoBehaviour {
     {
         if (collision.gameObject.layer == Layer) {
             GameControl.Instance.EatCandy(collision.gameObject);
+            //TODO: create particle
         }
     }
 
