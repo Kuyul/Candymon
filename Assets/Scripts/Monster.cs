@@ -22,20 +22,19 @@ public class Monster : MonoBehaviour {
 
     public void SetColor(Color color)
     {
-        pe = GetComponent<PointEffector2D>();
-        pe.colliderMask = LayerMask.GetMask(LayerMask.LayerToName(layerNumber));
-        Mouth.SetLayer(layerNumber);
+        Mouth.SetColor(color);
     }
 
     //Called from the monster script class to pass down particle information down to mouthscript
     public void SetParticle(GameObject particle)
     {
         Mouth.SetParticle(particle);
-        Mouth.SetColor(color);
+        
     }
 
     public void SetLayerProperties(int layerNumber)
     {
+        pe = GetComponent<PointEffector2D>();
         pe.colliderMask = LayerMask.GetMask(LayerMask.LayerToName(layerNumber));
         Mouth.SetLayer(layerNumber);
     }

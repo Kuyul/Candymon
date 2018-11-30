@@ -12,10 +12,10 @@ public class MouthScript : MonoBehaviour {
     {
         if (collision.gameObject.layer == Layer) {
             GameControl.Instance.EatCandy(collision.gameObject);
-            //TODO: create particle
             var a = Instantiate(Particle, transform.position, Quaternion.identity);
             var b = a.GetComponent<ParticleSystem>().main;
             b.startColor = c;
+            Destroy(a, 2f);
         }
     }
 
