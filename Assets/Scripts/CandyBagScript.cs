@@ -11,6 +11,7 @@ public class CandyBagScript : MonoBehaviour, IPointerDownHandler
     //Declare private variables
     private PointEffector2D pe;
     private CandyInfo Candy;
+    private bool Popped = false;
 
     //Declare private variables
     void Start()
@@ -26,13 +27,15 @@ public class CandyBagScript : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Pop();
-        Instantiate(GameControl.Instance.bagPop, transform.position, Quaternion.identity);
+        if (!Popped)
+        {
+            Pop();
+        }
     }
 
     public void Pop()
     {
-        //Spawn Level + 4 amount of Candies
+        Instantiate(GameControl.Instance.bagPop, transform.position, Quaternion.identity);
         int amount = Candy.GetCandyCount();
         for (int i = 0; i < amount; i++)
         {

@@ -2800,9 +2800,9 @@ MonoBehaviour:
   - {fileID: 520242080}
   - {fileID: 2138184873}
   - {fileID: 1277041476}
-  MaxCandyCount: 150
+  MaxCandyCount: 100
   CandyJar: {fileID: 1237117513885738, guid: cf5ef6154035b6b4aa6873f572e8967e, type: 2}
-  SpawnFreq: 100
+  SpawnFreq: 10000000
   NumberOfJars: 2
   JarSpawn: {fileID: 558387064}
 --- !u!4 &725082953
