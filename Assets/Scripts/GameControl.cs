@@ -12,7 +12,9 @@ public class GameControl : MonoBehaviour {
     public Text GoldText;
     public Text LevelText;
     public Text ExpText;
+    public Text IdleExp;
     public Slider ExpBar;
+    public GameObject PanelIdle;
 
     //Declare public variables
     public MonsterScript Mon;
@@ -45,6 +47,9 @@ public class GameControl : MonoBehaviour {
         {
             Instance = this;
         }
+
+        Time.timeScale = 0;
+
         AddGold(9999999999999999);
         Candies = new List<GameObject>();
         Gold = GetGoldAmount();
@@ -67,7 +72,7 @@ public class GameControl : MonoBehaviour {
             TimeDiff = Convert.ToInt32(diff);
             var expGained = Level.IdleExperienceGained(TimeDiff);
             ExpGained = expGained; //Monster script will access it later
-            AddGold(expGained * Multiplier);
+            IdleExp.text = expGained.ToString();
         }
         //Run system time logging
         StartCoroutine(LogSystemTime());
@@ -271,5 +276,12 @@ public class GameControl : MonoBehaviour {
             r = number.ToString("### ### ###");
 
         return r;
+    }
+
+    public void ButtonIdle()
+    {
+        Time.timeScale = 1;
+        PanelIdle.SetActive(false);
+        AddGold(ExpGained * Multiplier);
     }
 }
