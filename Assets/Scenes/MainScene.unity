@@ -5897,7 +5897,7 @@ MonoBehaviour:
   - {fileID: 1792274712}
   - {fileID: 1075201267}
   - {fileID: 1375219623}
-  Particle: {fileID: 0}
+  Particle: {fileID: 1007315841535216, guid: e2c8256f99040df4588969cbfd82e669, type: 2}
 --- !u!61 &1623450764
 BoxCollider2D:
   m_ObjectHideFlags: 0

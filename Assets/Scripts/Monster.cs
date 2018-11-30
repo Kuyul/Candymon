@@ -20,15 +20,15 @@ public class Monster : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
     }
 
+    public void SetColor(Color color)
+    {
+        Mouth.SetColor(color);
+    }
+
     public void SetLayerProperties(int layerNumber)
     {
         pe.colliderMask = LayerMask.GetMask(LayerMask.LayerToName(layerNumber));
         Mouth.SetLayer(layerNumber);
-    }
-
-    public void SetColor(Color color)
-    {
-        sr.color = color;
     }
 
     public void SetParticle(GameObject particle)

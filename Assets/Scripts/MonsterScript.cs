@@ -37,10 +37,11 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
             //Set candy layer properties
             MonsterProperties[i].SetLayerProperties(candy.InstantiatePrefab.layer);
-            if (Particle != null)
-            {
-                MonsterProperties[i].SetParticle(Particle);
-            }
+
+            Color tempColor = Monsters[i].GetComponent<SpriteRenderer>().color;
+            MonsterProperties[i].SetColor(tempColor);
+            MonsterProperties[i].SetParticle(Particle);
+            
         }
     }
 
