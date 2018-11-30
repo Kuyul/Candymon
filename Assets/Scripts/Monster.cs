@@ -20,7 +20,7 @@ public class Monster : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
 
-    public void SetLayerProperties(int layerNumber)
+    public void SetColor(Color color)
     {
         pe = GetComponent<PointEffector2D>();
         pe.colliderMask = LayerMask.GetMask(LayerMask.LayerToName(layerNumber));
@@ -31,6 +31,13 @@ public class Monster : MonoBehaviour {
     public void SetParticle(GameObject particle)
     {
         Mouth.SetParticle(particle);
+        Mouth.SetColor(color);
+    }
+
+    public void SetLayerProperties(int layerNumber)
+    {
+        pe.colliderMask = LayerMask.GetMask(LayerMask.LayerToName(layerNumber));
+        Mouth.SetLayer(layerNumber);
     }
 
     //Called from MonsterScript class to start eating animation
