@@ -73,9 +73,9 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         for (int i = 0; i < Monsters.Length; i++)
         {
             //only enable animation for monsters active in hierarchy
-            if (Monsters[i].activeInHierarchy)
+            //if (Monsters[i].activeInHierarchy)
             //Enable Eating animation
-                MonsterProperties[i].Eating();
+                //MonsterProperties[i].Eating();
         }
     }
 
@@ -86,9 +86,9 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         for (int i = 0; i < Monsters.Length; i++)
         {
             //only enable animation for monsters active in hierarchy
-            if (Monsters[i].activeInHierarchy)
+            //if (Monsters[i].activeInHierarchy)
                 //Disable eating animation
-                MonsterProperties[i].Done();
+                //MonsterProperties[i].Done();
         }
     }
 }

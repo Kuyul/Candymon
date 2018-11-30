@@ -7,6 +7,7 @@ public class MouthScript : MonoBehaviour {
     private int Layer;
     private GameObject Particle;
     private Color c;
+    private Animator anim;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,7 +17,13 @@ public class MouthScript : MonoBehaviour {
             var b = a.GetComponent<ParticleSystem>().main;
             b.startColor = c;
             Destroy(a, 2f);
+            anim.SetTrigger("Eating");
         }
+    }
+
+    public void SetAnimator(Animator a)
+    {
+        anim = a;
     }
 
     public void SetColor(Color color)

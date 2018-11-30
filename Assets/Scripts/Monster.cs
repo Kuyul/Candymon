@@ -17,8 +17,10 @@ public class Monster : MonoBehaviour {
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        //Add animator to mouth so that it command it to animate when candies hit
+        Mouth.SetAnimator(GetComponent<Animator>());
     }
+
 
     public void SetColor(Color color)
     {
@@ -42,12 +44,12 @@ public class Monster : MonoBehaviour {
     //Called from MonsterScript class to start eating animation
     public void Eating()
     {
-        anim.SetTrigger("Eating");
+        //anim.SetTrigger("Eating");
     }
 
     //Called from MonsterScript class to stop eating animation
     public void Done()
     {
-        anim.SetTrigger("Done");
+        //anim.SetTrigger("Done");
     }
 }
