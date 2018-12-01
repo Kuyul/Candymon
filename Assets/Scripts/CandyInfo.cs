@@ -46,7 +46,14 @@ public class CandyInfo : MonoBehaviour
     public void UpdateTexts()
     {
         LevelText.text = Level + "/10";
-        CostText.text = "" + GameControl.FormatNumberKM(CalculateCost());
+        if (Level < 10)
+        {
+            CostText.text = "" + GameControl.FormatNumberKM(CalculateCost());
+        }
+        else
+        {
+            CostText.text = "MAX";
+        }
     }
 
     public int GetLevel()
@@ -58,18 +65,26 @@ public class CandyInfo : MonoBehaviour
     //We check whether there is enough gold first.
     public bool Upgrade()
     {
-        //Check if we have enough cash
-        var gold = GameControl.Instance.GetGoldAmount();
-        if (gold >= CalculateCost())
+        if (Level < 10)
         {
-            GameControl.Instance.AddGold(-CalculateCost());
-            LevelUp();
-            UpdateTexts();
-            return true;
+            //Check if we have enough cash
+            var gold = GameControl.Instance.GetGoldAmount();
+            if (gold >= CalculateCost())
+            {
+                GameControl.Instance.AddGold(-CalculateCost());
+                LevelUp();
+                UpdateTexts();
+                return true;
+            }
+            else
+            {
+                Debug.Log("Not Enough Money");
+                return false;
+            }
         }
         else
         {
-            Debug.Log("Not Enough Money");
+            Debug.Log("Already Max Level");
             return false;
         }
     }
@@ -94,7 +109,7 @@ public class CandyInfo : MonoBehaviour
     {
         //Logic - UpgradeCost * 1.7^Level
         
-        var n = (long)(UpgradeCost * Mathf.Pow(1.3f, Level)); //ex 8796
+        var n = (long)(UpgradeCost * Mathf.Pow(1.4f, Level)); //ex 8796
         long digits = (long)Mathf.Ceil(Mathf.Log10(n)); //ex 4
         if (digits >= 4)
         {
@@ -108,7 +123,7 @@ public class CandyInfo : MonoBehaviour
     //Number of candy spawned from bag/jar = level + 4 (when level > 0)
     public int GetCandyCount()
     {
-        return Level * 2;
+        return Level + 1;
     }
 
     public GameObject InstantiateAtPos(Vector3 pos)

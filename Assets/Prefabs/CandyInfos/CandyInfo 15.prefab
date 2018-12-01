@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4474965729555458}
   - component: {fileID: 114760666443120358}
   m_Layer: 0
-  m_Name: CandyInfo 11
+  m_Name: CandyInfo 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,8 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelText: {fileID: 0}
   CostText: {fileID: 0}
-  InstantiatePrefab: {fileID: 1748908273026894, guid: 7848011c4326f0941b8ab56d4250d4f1,
+  InstantiatePrefab: {fileID: 1748908273026894, guid: 1a989ac1d4c0b964c9b06167583a7b53,
     type: 2}
-  Type: 10
-  Exp: 4194304
-  UpgradeCost: 400000000
+  Type: 14
+  Exp: 1073741824
+  UpgradeCost: 102400000000

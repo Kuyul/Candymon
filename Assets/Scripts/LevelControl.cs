@@ -7,6 +7,7 @@ public class LevelControl : MonoBehaviour
 {
 
     //Declare public variables
+    public Text IdleCandy;
     public CandyInfo[] Candies;
     public Text[] CandyLevelTexts; //UI that represents candy levels
     public Text[] CandyCostTexts; //UI that represents candy costs
@@ -47,6 +48,7 @@ public class LevelControl : MonoBehaviour
     {
         if (BagCount <= 0 && GameControl.Instance.GetCandyCount() <= MaxCandyCount)
         {
+            BagCount = 6;
             SpawnedIndexes.Clear(); //Must clear this! clear the list of spawned positions
             for (int i = 0; i < NumberOfBags; i++)
             {
@@ -63,6 +65,7 @@ public class LevelControl : MonoBehaviour
             }
         }
     }
+
 
     //Organise candies into two different criteria based on its level
     private void PopulateCandyTypes()
@@ -102,7 +105,6 @@ public class LevelControl : MonoBehaviour
         var position = GetSpawnPosition();
         position.z = -2.0f; //Bag must be in front of monster click
         var obj = Instantiate(CandyBag, position, Quaternion.identity);
-        BagCount++; //increment counter
         obj.GetComponent<CandyBagScript>().SetCandy(Candies[i]);
     }
 
@@ -177,17 +179,19 @@ public class LevelControl : MonoBehaviour
     //Calculate exp gained while in idle mode
     public long IdleExperienceGained(int idleSeconds)
     {
-        var count = NumberOfJars * (idleSeconds / SpawnFreq); //How many jars spawned during that period?
+        var count = idleSeconds/8; //How many jars spawned during that period?
         long avgExp = 0;
-        if (MaxCandyTypes.Count >= 1)
+        if (ActiveCandyTypes.Count >= 1)
         {
             //Get the last maxed candy, and calculate idle experience gained with it.
-            var candy = Candies[MaxCandyTypes[MaxCandyTypes.Count - 1]];
+            var candy = Candies[ActiveCandyTypes[ActiveCandyTypes.Count - 1]];
             var spawnCount = candy.GetCandyCount();
             var exp = candy.Exp;
             avgExp += spawnCount * exp;
         }
-        return avgExp * (int)count;
+        Debug.Log(avgExp * count);
+        Debug.Log(idleSeconds);
+        return avgExp * count;
     }
 
     public CandyInfo[] GetCandyInfos()

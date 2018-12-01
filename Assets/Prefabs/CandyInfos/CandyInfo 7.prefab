@@ -56,5 +56,5 @@ MonoBehaviour:
   InstantiatePrefab: {fileID: 1748908273026894, guid: bc4ce6369c882f14ebe89cc91d639323,
     type: 2}
   Type: 6
-  Exp: 8192
+  Exp: 16384
   UpgradeCost: 1562500

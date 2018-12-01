@@ -35,7 +35,8 @@ public class CandyBagScript : MonoBehaviour, IPointerDownHandler
 
     public void Pop()
     {
-        Instantiate(GameControl.Instance.bagPop, transform.position, Quaternion.identity);
+        var a = Instantiate(GameControl.Instance.bagPop, transform.position, Quaternion.identity);
+        Destroy(a, 2.0f);
         int amount = Candy.GetCandyCount();
         for (int i = 0; i < amount; i++)
         {

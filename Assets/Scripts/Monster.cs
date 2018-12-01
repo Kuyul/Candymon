@@ -40,16 +40,4 @@ public class Monster : MonoBehaviour {
         pe.colliderMask = LayerMask.GetMask(LayerMask.LayerToName(layerNumber));
         Mouth.SetLayer(layerNumber);
     }
-
-    //Called from MonsterScript class to start eating animation
-    public void Eating()
-    {
-        //anim.SetTrigger("Eating");
-    }
-
-    //Called from MonsterScript class to stop eating animation
-    public void Done()
-    {
-        //anim.SetTrigger("Done");
-    }
 }

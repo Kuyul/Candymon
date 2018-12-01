@@ -70,25 +70,11 @@ public class MonsterScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnPointerDown(PointerEventData eventData)
     {
         SetMouthOpen(true);
-        for (int i = 0; i < Monsters.Length; i++)
-        {
-            //only enable animation for monsters active in hierarchy
-            //if (Monsters[i].activeInHierarchy)
-            //Enable Eating animation
-                //MonsterProperties[i].Eating();
-        }
     }
 
     //On mousebutton up, its mouth will close
     public void OnPointerUp(PointerEventData eventData)
     {
         SetMouthOpen(false);
-        for (int i = 0; i < Monsters.Length; i++)
-        {
-            //only enable animation for monsters active in hierarchy
-            //if (Monsters[i].activeInHierarchy)
-                //Disable eating animation
-                //MonsterProperties[i].Done();
-        }
     }
 }

@@ -15,6 +15,13 @@ public class GameControl : MonoBehaviour {
     public Text IdleExp;
     public Slider ExpBar;
     public GameObject PanelIdle;
+    public RectTransform Content;
+    public AudioSource CandyHitSound;
+
+    //Level up properties
+    public GameObject LevelUpPanel;
+    public Text RewardText;
+    private long RewardAmount;
 
     //Declare public variables
     public MonsterScript Mon;
@@ -50,9 +57,9 @@ public class GameControl : MonoBehaviour {
 
         Time.timeScale = 0;
 
-        AddGold(9999999999999999);
         Candies = new List<GameObject>();
         Gold = GetGoldAmount();
+        AddGold(999999999999999);
         FormatNumberB(Gold);
 
         //Set Monster level properties
@@ -62,6 +69,7 @@ public class GameControl : MonoBehaviour {
         //Set Experience Properties
         Experience = GetMonsterExperience();
         SetExpText();
+        GetContentPos();
 
         //Get time difference
         DateTime timeNow = System.DateTime.Now;
@@ -72,7 +80,11 @@ public class GameControl : MonoBehaviour {
             TimeDiff = Convert.ToInt32(diff);
             var expGained = Level.IdleExperienceGained(TimeDiff);
             ExpGained = expGained; //Monster script will access it later
-            IdleExp.text = expGained.ToString();
+            IdleExp.text = "" + FormatNumberB(expGained);
+        }
+        else
+        {
+            ButtonIdle();
         }
         //Run system time logging
         StartCoroutine(LogSystemTime());
@@ -89,6 +101,7 @@ public class GameControl : MonoBehaviour {
         {
             DateTime time = System.DateTime.Now;
             PlayerPrefs.SetString("SystemTime", System.DateTime.Now.ToString());
+            SetContentPos(Content.anchoredPosition.x);
             yield return new WaitForSeconds(10.0f);
         }
         
@@ -102,6 +115,7 @@ public class GameControl : MonoBehaviour {
 
     //Called from mouth script to destroy candy when the monster eats it!
     public void EatCandy(GameObject candy) {
+        CandyHitSound.Play();
         Destroy(candy);
         Candies.Remove(candy);
         var exp = candy.GetComponent<Candy>().Exp;
@@ -115,6 +129,19 @@ public class GameControl : MonoBehaviour {
         AddGold(AccumulatedGold);
         AccumulatedExp = 0;
         AccumulatedGold = 0;
+    }
+
+    //Called to auto adjust slider bar
+    private void SetContentPos(float value)
+    {
+        PlayerPrefs.SetFloat("ContentPos", value);
+    }
+
+    private void GetContentPos()
+    {
+        var pos = PlayerPrefs.GetFloat("ContentPos", 0);
+        if (pos != 0)
+        Content.anchoredPosition = new Vector2(PlayerPrefs.GetFloat("ContentPos"), Content.anchoredPosition.y);
     }
 
     //Monster Related Methods
@@ -153,6 +180,11 @@ public class GameControl : MonoBehaviour {
         LevelText.text = "Lv " + MonsterLevel;
         PlayerPrefs.SetFloat("Experience", Experience);
         SetExpText();
+
+        LevelUpPanel.SetActive(true);
+        RewardAmount = LevelExp[MonsterLevel - 1]/4;
+        RewardText.text = "" + RewardAmount;
+        Time.timeScale = 0;
     }
 
     public void AddEvolutionCount()
@@ -278,10 +310,19 @@ public class GameControl : MonoBehaviour {
         return r;
     }
 
+    //called when pressed button coming back from idle
     public void ButtonIdle()
     {
         Time.timeScale = 1;
         PanelIdle.SetActive(false);
         AddGold(ExpGained * Multiplier);
+    }
+
+    //called when button clicked for collecting reward after lvlup
+    public void LevelUpReward()
+    {
+        Time.timeScale = 1;
+        LevelUpPanel.SetActive(false);
+        AddGold(RewardAmount);
     }
 }
