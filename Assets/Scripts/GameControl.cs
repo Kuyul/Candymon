@@ -59,7 +59,7 @@ public class GameControl : MonoBehaviour {
 
         Candies = new List<GameObject>();
         Gold = GetGoldAmount();
-        AddGold(999999999999999);
+        AddGold(9999999);
         FormatNumberB(Gold);
 
         //Set Monster level properties
