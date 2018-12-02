@@ -22,6 +22,8 @@ public class GameControl : MonoBehaviour {
     public GameObject LevelUpPanel;
     public Text RewardText;
     private long RewardAmount;
+    public GameObject ButtonMute;
+    public GameObject ButtonUnmute;
 
     //Declare public variables
     public MonsterScript Mon;
@@ -324,5 +326,23 @@ public class GameControl : MonoBehaviour {
         Time.timeScale = 1;
         LevelUpPanel.SetActive(false);
         AddGold(RewardAmount);
+    }
+
+    // Mutes audio source
+    public void Mute()
+    {
+        CandyHitSound.volume = 0;
+        ButtonMute.SetActive(false);
+        ButtonUnmute.SetActive(true);
+        PlayerPrefs.SetInt("sound", 0);
+    }
+
+    // UnMutes audio source
+    public void UnMute()
+    {
+        CandyHitSound.volume = 1f;
+        ButtonMute.SetActive(true);
+        ButtonUnmute.SetActive(false);
+        PlayerPrefs.SetInt("sound", 1);
     }
 }
